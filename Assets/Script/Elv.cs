@@ -32,9 +32,9 @@ public class Elv : MonoBehaviour
             case 1: // 올라가기
                 if (upDelay++ > 50)
                 {
-                    transform.Translate(Vector3.up * Time.deltaTime);
+                    transform.position += new Vector3(0, 1.0f * Time.deltaTime, 0);
 
-                    if (transform.position.y > 0.16f)
+                    if (transform.position.y >= 0.16f)
                     {
                         isUp = 0;
                         upDelay = 0;
@@ -43,15 +43,16 @@ public class Elv : MonoBehaviour
                 }
                 break;
 
-            case 2:
+            case 2: // 내려가기
                 if (upDelay++ > 100)
                 {
-                    transform.Translate(-Vector3.up * Time.deltaTime);
+                    transform.position -= new Vector3(0, 1.0f * Time.deltaTime, 0);
 
-                    if (transform.position.y < -3.25f)
+                    if (transform.position.y <= -3.2f)
                     {
                         isUp = 0;
                         upDelay = 0;
+                        isRotZ = 2;
                     }
                 }
                 break;
@@ -66,7 +67,8 @@ public class Elv : MonoBehaviour
             case 1: // 내리기
                 
                 transform.Rotate(-Vector3.forward * Time.deltaTime);
-                if ( transform.rotation.z < -3.0f)
+
+                if ( transform.eulerAngles.z <= 357.0f)
                 {
                     isRotZ = 0;
                     isUp = 2;
@@ -74,6 +76,13 @@ public class Elv : MonoBehaviour
                 break;
 
             case 2: // 올리기
+
+                transform.Rotate( Vector3.forward * Time.deltaTime);
+                if (transform.eulerAngles.z >= 359.9f)
+                {
+                    isRotZ = 0;
+                    isUp = 0;
+                }
                 break;
         }
     }   
