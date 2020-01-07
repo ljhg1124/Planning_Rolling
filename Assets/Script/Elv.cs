@@ -21,7 +21,7 @@ public class Elv : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         switch (isUp)
         {
@@ -34,7 +34,7 @@ public class Elv : MonoBehaviour
                 {
                     transform.position += new Vector3(0, 1.0f * Time.deltaTime, 0);
 
-                    if (transform.position.y >= 0.16f)
+                    if (transform.position.y >= 0.175f)
                     {
                         isUp = 0;
                         upDelay = 0;
@@ -48,7 +48,7 @@ public class Elv : MonoBehaviour
                 {
                     transform.position -= new Vector3(0, 1.0f * Time.deltaTime, 0);
 
-                    if (transform.position.y <= -3.2f)
+                    if (transform.position.y <= -3.18f)
                     {
                         isUp = 0;
                         upDelay = 0;
@@ -68,7 +68,7 @@ public class Elv : MonoBehaviour
                 
                 transform.Rotate(-Vector3.forward * Time.deltaTime);
 
-                if ( transform.eulerAngles.z <= 357.0f)
+                if ( transform.eulerAngles.z <= 355.0f)
                 {
                     isRotZ = 0;
                     isUp = 2;
