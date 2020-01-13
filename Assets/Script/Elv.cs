@@ -6,13 +6,19 @@ public class Elv : MonoBehaviour
 {
     public int isUp;
     public int isRotZ;
-    private int upDelay;
+
+    const float ELV_SPEED = 3.0f;
+    const float ELV_ROT_SPEED = 10.0f;
+
+    private void Elv_Up() { transform.position += new Vector3(0, ELV_SPEED * Time.deltaTime, 0); }
+    private void Elv_Down() { transform.position -= new Vector3(0, ELV_SPEED * Time.deltaTime, 0); }
+    private void Elv_RotUp() { transform.Rotate(Vector3.forward * (Time.deltaTime * ELV_ROT_SPEED) ); }
+    private void Elv_RotDown() { transform.Rotate(-Vector3.forward * (Time.deltaTime * ELV_ROT_SPEED) ); }
 
     void Awake()
     {
         isUp = 0;
         isRotZ = 0;
-        upDelay = 0;
     }
 
     // Start is called before the first frame update
@@ -25,65 +31,52 @@ public class Elv : MonoBehaviour
     {
         switch (isUp)
         {
-            case 0:
-
-                break;
-
+            case 0: break;
             case 1: // 올라가기
-                if (upDelay++ > 50)
-                {
-                    transform.position += new Vector3(0, 1.0f * Time.deltaTime, 0);
 
-                    if (transform.position.y >= 0.175f)
-                    {
-                        isUp = 0;
-                        upDelay = 0;
-                        isRotZ = 1;
-                    }
+                Elv_Up();
+                if (transform.position.y >= 0.175f)
+                {
+                    isUp = 0;
+                    isRotZ = 1;
                 }
+
                 break;
 
             case 2: // 내려가기
-                if (upDelay++ > 100)
-                {
-                    transform.position -= new Vector3(0, 1.0f * Time.deltaTime, 0);
+                Elv_Down();
 
-                    if (transform.position.y <= -3.18f)
-                    {
-                        isUp = 0;
-                        upDelay = 0;
-                        isRotZ = 2;
-                    }
+                if (transform.position.y <= -3.18f)
+                {
+                    isUp = 0;
+                    isRotZ = 2;
                 }
                 break;
         }
 
         switch( isRotZ )
         {
-            case 0:
-
-                break;
-
+            case 0: break;
             case 1: // 내리기
-                
-                transform.Rotate(-Vector3.forward * Time.deltaTime);
 
+                Elv_RotDown();
                 if ( transform.eulerAngles.z <= 355.0f)
-                {
                     isRotZ = 0;
-                    isUp = 2;
-                }
+                
                 break;
 
             case 2: // 올리기
 
-                transform.Rotate( Vector3.forward * Time.deltaTime);
+                Elv_RotUp();
                 if (transform.eulerAngles.z >= 359.9f)
-                {
                     isRotZ = 0;
-                    isUp = 0;
-                }
+                
                 break;
         }
-    }   
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 }
