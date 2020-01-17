@@ -13,7 +13,8 @@ public class Elv : MonoBehaviour
     private void Elv_Up() { transform.position += new Vector3(0, ELV_SPEED * Time.deltaTime, 0); }
     private void Elv_Down() { transform.position -= new Vector3(0, ELV_SPEED * Time.deltaTime, 0); }
     private void Elv_RotUp() { transform.Rotate(Vector3.forward * (Time.deltaTime * ELV_ROT_SPEED) ); }
-    private void Elv_RotDown() { transform.Rotate(-Vector3.forward * (Time.deltaTime * ELV_ROT_SPEED) ); }
+    private void Elv_RotDown() { transform.Rotate(-Vector3.forward * (Time.deltaTime * ELV_ROT_SPEED) ); 
+    }
 
     void Awake()
     {
@@ -35,7 +36,7 @@ public class Elv : MonoBehaviour
             case 1: // 올라가기
 
                 Elv_Up();
-                if (transform.position.y >= 0.175f)
+                if (transform.position.y >= 9.615f)
                 {
                     isUp = 0;
                     isRotZ = 1;
@@ -46,7 +47,7 @@ public class Elv : MonoBehaviour
             case 2: // 내려가기
                 Elv_Down();
 
-                if (transform.position.y <= -3.18f)
+                if (transform.position.y <= 4.56f)
                 {
                     isUp = 0;
                     isRotZ = 2;
@@ -60,7 +61,7 @@ public class Elv : MonoBehaviour
             case 1: // 내리기
 
                 Elv_RotDown();
-                if ( transform.eulerAngles.z <= 355.0f)
+                if ( transform.eulerAngles.z <= 357.0f)
                     isRotZ = 0;
                 
                 break;

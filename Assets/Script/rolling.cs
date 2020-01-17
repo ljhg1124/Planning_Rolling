@@ -17,7 +17,7 @@ public class rolling : MonoBehaviour
 
     public void FireBall()
     {
-        rb.GetComponent<Rigidbody>().AddRelativeTorque(new Vector3(0, 0, -10000));
+        rb.GetComponent<Rigidbody>().AddRelativeTorque(new Vector3(0, 0, 100000));
         //rb.GetComponent<Rigidbody>().AddForce(new Vector3(10000, 0, 0));
         //rb.GetComponent<Rigidbody>().AddForceAtPosition(new Vector3(100, 0, 0));
     }
